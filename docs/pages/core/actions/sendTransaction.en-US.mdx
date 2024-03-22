@@ -1,0 +1,68 @@
+---
+title: 'sendTransaction'
+description: 'Action for sending a transaction.'
+---
+
+import { Callout } from 'nextra-theme-docs'
+
+# sendTransaction
+
+Action for sending a transaction.
+
+This is a wrapper around viem's [`sendTransaction`](https://viem.sh/docs/actions/wallet/sendTransaction.html).
+
+```ts
+import { sendTransaction } from '@wagmi/core'
+```
+
+## Usage
+
+```ts {6}
+import { sendTransaction } from '@wagmi/core'
+import { parseEther } from 'viem'
+
+const { hash } = await sendTransaction({
+  to: 'moxey.eth',
+  value: parseEther('0.01'),
+})
+```
+
+### Prepared Usage
+
+```ts {6}
+import { sendTransaction, prepareSendTransaction } from '@wagmi/core'
+import { parseEther } from 'viem'
+
+const config = await prepareSendTransaction({
+  request: { to: 'moxey.eth', value: parseEther('0.01') },
+})
+
+...
+
+const { hash } = await sendTransaction(config)
+```
+
+## Return Value
+
+```ts
+{
+  hash: `0x${string}`
+}
+```
+
+## Configuration
+
+### request
+
+The request to use when sending the transaction.
+
+```ts {7}
+import { sendTransaction } from '@wagmi/core'
+
+const { hash } = await sendTransaction({
+  request: {
+    to: 'moxey.eth',
+    value: parseEther('0.01'),
+  },
+})
+```
